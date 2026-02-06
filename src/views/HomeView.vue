@@ -1,8 +1,11 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted } from 'vue'
+  import { ref, computed, onMounted, watch } from 'vue'
   import MarkdownIt from 'markdown-it'
   import hljs from 'highlight.js'
+  import { useI18n } from 'vue-i18n'
   import 'highlight.js/styles/atom-one-dark.css'
+
+  const { t, locale } = useI18n()
 
   // Initialize Markdown parser with Syntax Highlighting
   const md: MarkdownIt = new MarkdownIt({
@@ -41,46 +44,43 @@
   const selectedFile = ref<FileNode | null>(null)
   const isSidebarOpen = ref(true)
 
-  // System Documentation (Home)
-  const ecosystemHome: FileNode = {
-    name: 'Ecosystem Overview',
+  // System Documentation (Home) - Computed to react to language changes
+  const ecosystemHome = computed<FileNode>(() => ({
+    name: t('common.gettingStarted'),
     path: 'home',
     type: 'home',
     content: `
-# 🚀 GitHub Copilot Ecosystem
+# ${t('ecosystem.title')}
 
-Welcome to the **Modern Vue 3 Boilerplate**. This project is specifically designed to work harmoniously with AI agents. 
-The configuration inside the \`.github/\` folder is the "brain" that guides GitHub Copilot to write code exactly how we want.
+${t('ecosystem.intro')}
 
-## 📁 The .github/ Structure
+## ${t('ecosystem.structure')}
 
-### 🤖 Agents
-Custom AI personalities focused on specific domains. 
-- **Vue Helper**: Your general architect. Use him for planning and big-picture tasks.
-- **Component Generator**: A precision tool for creating Atomic UI components with testing.
+### ${t('ecosystem.agentsTitle')}
+${t('ecosystem.agentsDesc')}
 
-### 🧠 Skills
-Technical "knowledge packs" that teach the AI how we handle specific tasks.
-- **Vue Best Practices**: Teaches performance, state management, and anti-patterns.
-- **Component Generation**: Defines the exact structure and testing strategy for UI code.
+### ${t('ecosystem.skillsTitle')}
+${t('ecosystem.skillsDesc')}
 
-### 📜 Instructions
-The project's "bible". It contains the coding standards, naming conventions, and architectural rules that the AI must follow at all times.
+### ${t('ecosystem.instructionsTitle')}
+${t('ecosystem.instructionsDesc')}
 
-### ⚡ Prompts
-Pre-defined templates for common tasks. Instead of typing a long prompt, you can use these to quickly generate stores, pages, or refactor code.
+### ${t('ecosystem.promptsTitle')}
+${t('ecosystem.promptsDesc')}
 
 ---
 
-**Tip:** Select any file from the sidebar to inspect its configuration and understand how to interact with your AI agents.
+${t('ecosystem.tip')}
 `,
-  }
+  }))
 
   // Group by categories
   const categories = computed(() => {
-    const cats: Record<string, FileNode[]> = {
-      'Getting Started': [ecosystemHome],
-    }
+    const cats: Record<string, FileNode[]> = {}
+
+    // Localize the "Getting Started" label
+    const gettingStartedLabel = t('common.gettingStarted')
+    cats[gettingStartedLabel] = [ecosystemHome.value]
 
     const order = ['agents', 'skills', 'instructions', 'prompts']
 
@@ -105,7 +105,7 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
 
     const sortedCats: Record<string, FileNode[]> = {}
     // First, Getting Started
-    sortedCats['Getting Started'] = cats['Getting Started'] || []
+    sortedCats[gettingStartedLabel] = cats[gettingStartedLabel] || []
 
     // Then, the defined order
     order.forEach((key) => {
@@ -116,8 +116,15 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
     return sortedCats
   })
 
+  // Re-select home if language changes while on home
+  watch(locale, () => {
+    if (selectedFile.value?.type === 'home') {
+      selectedFile.value = ecosystemHome.value
+    }
+  })
+
   onMounted(() => {
-    selectedFile.value = ecosystemHome
+    selectedFile.value = ecosystemHome.value
     if (window.innerWidth < 1024) isSidebarOpen.value = false
   })
 
@@ -152,10 +159,10 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
             <h2
               class="font-black text-gray-900 dark:text-white flex items-center gap-2 tracking-tight"
             >
-              <span class="text-xl">🛠️</span> CONFIGURATION
+              <span class="text-xl">🛠️</span> {{ t('common.configuration') }}
             </h2>
             <p class="text-[10px] text-gray-400 uppercase tracking-widest mt-1 font-bold">
-              Project Architecture
+              {{ t('common.projectArchitecture') }}
             </p>
           </div>
           <button
@@ -193,7 +200,7 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
                 "
               >
                 <span class="mt-0.5 opacity-60">
-                  {{ file.name === 'Ecosystem Overview' ? '🏠' : '📄' }}
+                  {{ file.type === 'home' ? '🏠' : '📄' }}
                 </span>
                 <span class="truncate font-medium leading-tight">{{ file.name }}</span>
               </button>
@@ -266,7 +273,7 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
           <button
             class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-black px-4 py-2 rounded-full transition-all shadow-md shadow-blue-500/20 uppercase tracking-widest"
           >
-            Deploy App
+            {{ t('common.deploy') }}
           </button>
         </div>
       </nav>
@@ -278,6 +285,15 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
             class="prose prose-slate dark:prose-invert max-w-none py-8 md:py-12"
             v-html="renderedContent"
           ></article>
+
+          <div
+            v-else
+            class="h-full flex flex-col items-center justify-center text-gray-400 p-8 text-center opacity-50"
+          >
+            <span class="text-7xl mb-4 grayscale">🚀</span>
+            <h3 class="text-2xl font-bold mb-2">{{ t('common.readyToCode') }}</h3>
+            <p class="max-w-md">{{ t('common.selectFile') }}</p>
+          </div>
         </div>
       </div>
     </main>

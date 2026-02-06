@@ -1,0 +1,46 @@
+{
+  "common": {
+    "gettingStarted": "Getting Started",
+    "home": "Home",
+    "about": "About",
+    "deploy": "Deploy App",
+    "configuration": "Configuration",
+    "projectArchitecture": "Project Architecture",
+    "githubRepo": "GitHub Repo",
+    "readyToCode": "Ready to Code",
+    "selectFile": "Select a config file to understand how your AI agents work."
+  },
+  "ecosystem": {
+    "title": "🚀 GitHub Copilot Ecosystem",
+    "intro": "Welcome to the **Modern Vue 3 Boilerplate**. This project is specifically designed to work harmoniously with AI agents. The configuration inside the `.github/` folder is the \"brain\" that guides GitHub Copilot to write code exactly how we want.",
+    "structure": "📁 The .github/ Structure",
+    "agentsTitle": "🤖 Agents",
+    "agentsDesc": "Custom AI personalities focused on specific domains.\n- **Vue Helper**: Your general architect. Use him for planning and big-picture tasks.\n- **Component Generator**: A precision tool for creating Atomic UI components with testing.",
+    "skillsTitle": "🧠 Skills",
+    "skillsDesc": "Technical \"knowledge packs\" that teach the AI how we handle specific tasks.\n- **Vue Best Practices**: Teaches performance, state management, and anti-patterns.\n- **Component Generation**: Defines the exact structure and testing strategy for UI code.",
+    "instructionsTitle": "📜 Instructions",
+    "instructionsDesc": "The project's \"bible\". It contains the coding standards, naming conventions, and architectural rules that the AI must follow at all times.",
+    "promptsTitle": "⚡ Prompts",
+    "promptsDesc": "Pre-defined templates for common tasks. Instead of typing a long prompt, you can use these to quickly generate stores, pages, or refactor code.",
+    "tip": "**Tip:** Select any file from the sidebar to inspect its configuration and understand how to interact with your AI agents."
+  },
+  "about": {
+    "title": "About This Boilerplate",
+    "structureTitle": "Project Structure",
+    "structureDesc": "This Vue 3 boilerplate is designed to help you quickly start new projects with best practices already configured. It includes:",
+    "viteDesc": "Next-generation build tool for fast development",
+    "vueDesc": "Composition API with script setup",
+    "tsDesc": "Strict type checking enabled",
+    "piniaDesc": "State management with composition API",
+    "routerDesc": "File-based routing with lazy-loading",
+    "tailwindDesc": "Utility-first CSS framework",
+    "eslintDesc": "Code quality and formatting",
+    "vitestDesc": "Fast unit testing framework",
+    "copilotTitle": "GitHub Copilot Integration",
+    "copilotDesc": "This boilerplate includes special configurations for GitHub Copilot:",
+    "copilotAgents": "Custom AI agents for Vue development",
+    "copilotSkills": "Reusable skills for common tasks",
+    "copilotInstructions": "Project-specific coding guidelines",
+    "copilotPrompts": "Ready-to-use prompt templates"
+  }
+}

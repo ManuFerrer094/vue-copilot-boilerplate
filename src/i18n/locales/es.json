@@ -1,0 +1,46 @@
+{
+  "common": {
+    "gettingStarted": "Empezando",
+    "home": "Inicio",
+    "about": "Aca de",
+    "deploy": "Desplegar App",
+    "configuration": "Configuración",
+    "projectArchitecture": "Arquitectura del Proyecto",
+    "githubRepo": "Repo de GitHub",
+    "readyToCode": "Listo para Programar",
+    "selectFile": "Selecciona un archivo de configuración para entender cómo funcionan tus agentes de IA."
+  },
+  "ecosystem": {
+    "title": "🚀 Ecosistema de GitHub Copilot",
+    "intro": "Bienvenido al **Boilerplate Moderno de Vue 3**. Este proyecto está diseñado específicamente para trabajar en armonía con agentes de IA. La configuración dentro de la carpeta `.github/` es el \"cerebro\" que guía a GitHub Copilot para escribir código exactamente como queremos.",
+    "structure": "📁 La Estructura de .github/",
+    "agentsTitle": "🤖 Agentes",
+    "agentsDesc": "Personalidades de IA personalizadas enfocadas en dominios específicos.\n- **Vue Helper**: Tu arquitecto general. Úsalo para la planificación y tareas de visión general.\n- **Component Generator**: Una herramienta de precisión para crear componentes de UI atómicos con pruebas.",
+    "skillsTitle": "🧠 Skills",
+    "skillsDesc": "Paquetes de \"conocimiento técnico\" que enseñan a la IA cómo manejamos tareas específicas.\n- **Vue Best Practices**: Enseña rendimiento, gestión de estado y anti-patrones.\n- **Component Generation**: Define la estructura exacta y la estrategia de pruebas para el código de UI.",
+    "instructionsTitle": "📜 Instrucciones",
+    "instructionsDesc": "La \"biblia\" del proyecto. Contiene los estándares de codificación, convenciones de nomenclatura y reglas arquitectónicas que la IA debe seguir en todo momento.",
+    "promptsTitle": "⚡ Prompts",
+    "promptsDesc": "Plantillas predefinidas para tareas comunes. En lugar de escribir un prompt largo, puedes usarlas para generar rápidamente tiendas, páginas o refactorizar código.",
+    "tip": "**Consejo:** Selecciona cualquier archivo de la barra lateral para inspeccionar su configuración y entender cómo interactuar con tus agentes de IA."
+  },
+  "about": {
+    "title": "Sobre este Boilerplate",
+    "structureTitle": "Estructura del Proyecto",
+    "structureDesc": "Este boilerplate de Vue 3 está diseñado para ayudarte a iniciar rápidamente nuevos proyectos con las mejores prácticas ya configuradas. Incluye:",
+    "viteDesc": "Herramienta de construcción de próxima generación para un desarrollo rápido",
+    "vueDesc": "Composition API con script setup",
+    "tsDesc": "Chequeo de tipos estricto habilitado",
+    "piniaDesc": "Gestión de estado con Composition API",
+    "routerDesc": "Enrutamiento basado en archivos con carga perezosa",
+    "tailwindDesc": "Framework de CSS utilitario",
+    "eslintDesc": "Calidad de código y formateo",
+    "vitestDesc": "Framework de pruebas unitarias rápido",
+    "copilotTitle": "Integración con GitHub Copilot",
+    "copilotDesc": "Este boilerplate incluye configuraciones especiales para GitHub Copilot:",
+    "copilotAgents": "Agentes de IA personalizados para desarrollo Vue",
+    "copilotSkills": "Skills reutilizables para tareas comunes",
+    "copilotInstructions": "Pautas de codificación específicas del proyecto",
+    "copilotPrompts": "Plantillas de prompts listas para usar"
+  }
+}
