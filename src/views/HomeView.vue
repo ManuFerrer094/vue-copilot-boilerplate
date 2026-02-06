@@ -2,6 +2,7 @@
   import { ref, computed, onMounted, watch } from 'vue'
   import MarkdownIt from 'markdown-it'
   import hljs from 'highlight.js'
+  import BaseSidebarSection from '@/components/ui/BaseSidebarSection.vue'
   import { useI18n } from 'vue-i18n'
   import 'highlight.js/styles/atom-one-dark.css'
 
@@ -116,6 +117,31 @@ ${t('ecosystem.tip')}
     return sortedCats
   })
 
+  const agentsItems = computed(() =>
+    (categories.value['agents'] || []).map((f) => ({ label: f.name, href: f.path }))
+  )
+  const skillsItems = computed(() =>
+    (categories.value['skills'] || []).map((f) => ({ label: f.name, href: f.path }))
+  )
+  const instructionsItems = computed(() =>
+    (categories.value['instructions'] || []).map((f) => ({ label: f.name, href: f.path }))
+  )
+  const promptsItems = computed(() =>
+    (categories.value['prompts'] || []).map((f) => ({ label: f.name, href: f.path }))
+  )
+
+  function onSectionSelect(item: { label: string; href?: string }) {
+    if (!item.href) return
+    const allCats = Object.values(categories.value)
+    for (const arr of allCats) {
+      const found = arr.find((x: any) => x.path === item.href)
+      if (found) {
+        selectFile(found)
+        break
+      }
+    }
+  }
+
   // Re-select home if language changes while on home
   watch(locale, () => {
     if (selectedFile.value?.type === 'home') {
@@ -175,38 +201,53 @@ ${t('ecosystem.tip')}
       </div>
 
       <div class="flex-1 overflow-y-auto p-4 space-y-8 custom-scrollbar">
-        <div
-          v-for="(files, category) in categories"
-          :key="category"
-          class="category-group"
-        >
+        <div class="category-group">
           <h3
             class="px-2 mb-3 text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]"
           >
-            {{ category }}
+            {{ t('common.gettingStarted') }}
           </h3>
           <ul class="space-y-1">
-            <li
-              v-for="file in files"
-              :key="file.path"
-            >
+            <li>
               <button
-                @click="selectFile(file)"
+                @click="selectFile(ecosystemHome)"
                 class="w-full text-left px-3 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-start gap-3 group relative"
                 :class="
-                  selectedFile?.path === file.path
+                  selectedFile?.path === ecosystemHome.path
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
                     : 'text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800'
                 "
               >
-                <span class="mt-0.5 opacity-60">
-                  {{ file.type === 'home' ? '🏠' : '📄' }}
-                </span>
-                <span class="truncate font-medium leading-tight">{{ file.name }}</span>
+                <span class="mt-0.5 opacity-60">🏠</span>
+                <span class="truncate font-medium leading-tight">{{ ecosystemHome.name }}</span>
               </button>
             </li>
           </ul>
         </div>
+
+        <BaseSidebarSection
+          :title="t('ecosystem.agentsTitle')"
+          :items="agentsItems"
+          @select="onSectionSelect"
+        />
+
+        <BaseSidebarSection
+          :title="t('ecosystem.skillsTitle')"
+          :items="skillsItems"
+          @select="onSectionSelect"
+        />
+
+        <BaseSidebarSection
+          :title="t('ecosystem.instructionsTitle')"
+          :items="instructionsItems"
+          @select="onSectionSelect"
+        />
+
+        <BaseSidebarSection
+          :title="t('ecosystem.promptsTitle')"
+          :items="promptsItems"
+          @select="onSectionSelect"
+        />
       </div>
 
       <!-- Footer Profile in Sidebar -->
