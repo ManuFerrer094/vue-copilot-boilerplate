@@ -293,10 +293,22 @@ Pre-defined templates for common tasks. Instead of typing a long prompt, you can
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 dark:bg-gray-800 rounded-full border-4 border-transparent bg-clip-content;
+    background-color: #e5e7eb; /* gray-200 */
+    border-radius: 9999px;
+    border: 4px solid transparent;
+    background-clip: content-box;
   }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #1f2937; /* gray-800 */
+  }
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-300 dark:bg-gray-700;
+    background-color: #d1d5db; /* gray-300 */
+  }
+
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #374151; /* gray-700 */
   }
 
   /* Animations */
